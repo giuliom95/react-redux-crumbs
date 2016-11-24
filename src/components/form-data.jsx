@@ -25,6 +25,10 @@ const STYLE_BUTTON = {
   background: 'none'
 };
 
+const STYLE_OPERATIONS_BAR = {
+  marginTop: '15px'
+};
+
 
 export default class FormData extends React.Component {
 
@@ -32,6 +36,8 @@ export default class FormData extends React.Component {
     super(props);
     this.state = {text: ""};
     this.Input = null;
+    this.OpField = null;
+    this.currentOpFunc = null;
   }
 
   handleChange(event) {
@@ -41,31 +47,62 @@ export default class FormData extends React.Component {
   handleSubmit(event) {
     let number = parseInt(this.state.text);
     if (Number.isInteger(number)) {
-      this.props.addNumber(number);
+      this.currentOpFunc(number);
       this.setState({text: ""})
     }
     event.preventDefault();
   }
 
+  changeOperation(event, op) {
+    //Changes the sign of the current operation.
+    this.OpField.innerHTML = op;
+    
+    switch (op) {
+      case '+':
+        this.currentOpFunc = this.props.addNumber;
+      break;
+      case '-':
+        this.currentOpFunc = this.props.subtractNumber;
+      break;
+    }
+  }
+
   componentDidMount() {
     this.Input.focus();
+    this.changeOperation(null, '+');
   }
 
   render() {
     return (
       <form onSubmit={event => this.handleSubmit(event)}>
-        <span style={STYLE_SIGN}>+</span>
-        <input type="text"
-               onChange={event => this.handleChange(event)}
-               value={this.state.text}
-               ref={input => this.Input = input}
-               style={STYLE_INPUT}/>
-        <button type="submit" style={STYLE_BUTTON}>=</button>
+        <div>
+          <span style={STYLE_SIGN} ref={opField => this.OpField = opField}>+</span>
+          <input type="text"
+            onChange={event => this.handleChange(event)}
+            value={this.state.text}
+            ref={input => this.Input = input}
+            style={STYLE_INPUT}/>
+                 
+          <button type="submit" style={STYLE_BUTTON}>=</button>
+        </div>
+        <div style={STYLE_OPERATIONS_BAR}>
+          <button 
+            type="button" 
+            style={STYLE_BUTTON}
+            onClick={event => this.changeOperation(event, '+')}
+          >+</button>
+          <button 
+            type="button" 
+            style={STYLE_BUTTON}
+            onClick={event => this.changeOperation(event, '-')}
+          >-</button>
+        </div>
       </form>
     )
   }
 }
 
 FormData.propTypes = {
-  addNumber: PropTypes.func.isRequired
+  addNumber: PropTypes.func.isRequired,
+  subtractNumber: PropTypes.func.isRequired
 };

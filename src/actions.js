@@ -4,3 +4,10 @@ export function addNumberAction(number) {
     number: number
   }
 }
+
+export function subtractNumberAction(number) {
+  return {
+    type: "SUBTRACT_NUMBER",
+    number: number
+  }
+}
