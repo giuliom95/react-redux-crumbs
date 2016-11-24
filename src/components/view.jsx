@@ -6,11 +6,11 @@ const STYLE = {
   margin: "20px"
 };
 
-export default function View({state, addNumber, subtractNumber}) {
+export default function View({state, addNumber, subtractNumber, multiplyNumber}) {
   return (
     <div style={STYLE}>
       <Count value={state.count}/>
-      <FormData addNumber={addNumber} subtractNumber={subtractNumber}/>
+      <FormData addNumber={addNumber} subtractNumber={subtractNumber} multiplyNumber={multiplyNumber}/>
     </div>
   )
 }
@@ -18,7 +18,8 @@ export default function View({state, addNumber, subtractNumber}) {
 View.propTypes = {
   state: PropTypes.object.isRequired,
   addNumber: PropTypes.func.isRequired,
-  subtractNumber: PropTypes.func.isRequired
+  subtractNumber: PropTypes.func.isRequired,
+  multiplyNumber: PropTypes.func.isRequired
 };
 
 

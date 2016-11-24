@@ -11,3 +11,10 @@ export function subtractNumberAction(number) {
     number: number
   }
 }
+
+export function multiplyNumberAction(number) {
+    return {
+    type: "MULTIPLY_NUMBER", 
+    number: number
+  }
+}

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import View from './view';
-import {addNumberAction, subtractNumberAction} from '../actions';
+import {addNumberAction, subtractNumberAction, multiplyNumberAction} from '../actions';
 
 
 function mapStateToProps(reduxState) {
@@ -15,7 +15,8 @@ function mapStateToProps(reduxState) {
 function mapDispatchToProps(dispatch) {
   return {
     addNumber: bindActionCreators(addNumberAction, dispatch),
-    subtractNumber: bindActionCreators(subtractNumberAction, dispatch)
+    subtractNumber: bindActionCreators(subtractNumberAction, dispatch),
+    multiplyNumber: bindActionCreators(multiplyNumberAction, dispatch)
   }
 }
 

@@ -14,6 +14,10 @@ function subtractNumber(state, number) {
   return state.set('count', state.count - number);
 }
 
+function multiplyNumber(state, number) {
+  return state.set('count', state.count * number); 
+}
+
 function reducer(state, action) {
   state = state || new State();
 
@@ -22,6 +26,8 @@ function reducer(state, action) {
       return addNumber(state, action.number);
     case "SUBTRACT_NUMBER":
       return subtractNumber(state, action.number);
+    case "MULTIPLY_NUMBER":
+      return multiplyNumber(state, action.number); 
     
     default:
       return state;

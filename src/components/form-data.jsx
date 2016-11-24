@@ -48,7 +48,7 @@ export default class FormData extends React.Component {
     let number = parseInt(this.state.text);
     if (Number.isInteger(number)) {
       this.currentOpFunc(number);
-      this.setState({text: ""})
+      this.setState({text: ""});
     }
     event.preventDefault();
   }
@@ -63,6 +63,9 @@ export default class FormData extends React.Component {
       break;
       case '-':
         this.currentOpFunc = this.props.subtractNumber;
+      break;
+      case '*': 
+        this.currentOpFunc = this.props.multiplyNumber;
       break;
     }
   }
@@ -96,6 +99,11 @@ export default class FormData extends React.Component {
             style={STYLE_BUTTON}
             onClick={event => this.changeOperation(event, '-')}
           >-</button>
+          <button 
+            type="button"
+            style={STYLE_BUTTON}
+            onClick={event => this.changeOperation(event, '*')}
+          >*</button>
         </div>
       </form>
     )
@@ -104,5 +112,6 @@ export default class FormData extends React.Component {
 
 FormData.propTypes = {
   addNumber: PropTypes.func.isRequired,
-  subtractNumber: PropTypes.func.isRequired
+  subtractNumber: PropTypes.func.isRequired,
+  multiplyNumber: PropTypes.func.isRequired
 };
