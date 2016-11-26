@@ -20,9 +20,14 @@ const STYLE_BUTTON = {
   background: 'none'
 };
 
-const STYLE_OPERATIONS_BAR = {
+const STYLE_TEXT_DIV = {
+  clear: 'left'
+};
+
+const STYLE_OPERATIONS_DIV = {
   marginTop: '15px'
 };
+
 
 
 export default class FormData extends React.Component {
@@ -45,7 +50,13 @@ export default class FormData extends React.Component {
     }
     event.preventDefault();
   }
-
+    
+  changeOperation(event, operation) {
+    this.props.changeOperation(operation);
+    event.preventDefault();
+    this.Input.focus();
+  }
+  
   componentDidMount() {
     this.Input.focus();
   }
@@ -53,7 +64,7 @@ export default class FormData extends React.Component {
   render() {
     return (
       <form onSubmit={event => this.handleSubmit(event)}>
-        <div>
+        <div style={STYLE_TEXT_DIV}>
           <input type="text"
             onChange={event => this.handleChange(event)}
             value={this.state.text}
@@ -62,21 +73,21 @@ export default class FormData extends React.Component {
                  
           <button type="submit" style={STYLE_BUTTON}>=</button>
         </div>
-        <div style={STYLE_OPERATIONS_BAR}>
+        <div style={STYLE_OPERATIONS_DIV}>
           <button 
             type="button" 
             style={STYLE_BUTTON}
-            onClick={event => this.props.changeOperation('+')}
+            onClick={event => this.changeOperation(event, '+')}
           >+</button>
           <button 
             type="button" 
             style={STYLE_BUTTON}
-            onClick={event => this.props.changeOperation('-')}
+            onClick={event => this.changeOperation(event, '-')}
           >-</button>
           <button 
             type="button"
             style={STYLE_BUTTON}
-            onClick={event => this.props.changeOperation('*')}
+            onClick={event => this.changeOperation(event, '*')}
           >*</button>
         </div>
       </form>

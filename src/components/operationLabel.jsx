@@ -1,10 +1,14 @@
 import React, {PropTypes} from 'react';
 
-const STYLE = {color: "black", fontSize: "28px"};
+const STYLE = {
+    color: "black", 
+    fontSize: "28px",
+    float: "right"
+};
 
 export default function OperationLabel({operation}) {
   return (
-    <span style={STYLE}>{operation}</span>
+    <div style={STYLE}>{operation}</div>
   )
 };
 

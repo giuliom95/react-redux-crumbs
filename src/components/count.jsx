@@ -1,10 +1,14 @@
 import React, {PropTypes} from 'react';
 
-const STYLE = {color: "black", fontSize: "28px"};
+const STYLE = {
+    color: "black", 
+    fontSize: "28px",
+    float: "left"
+};
 
 export default function Count({value}) {
   return (
-    <span style={STYLE}>{value}</span>
+    <div style={STYLE}>{value}</div>
   )
 };
 

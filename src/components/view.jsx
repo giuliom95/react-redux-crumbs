@@ -4,14 +4,17 @@ import Count from './count';
 import OperationLabel from './operationLabel';
 
 const STYLE = {
-  margin: "20px"
+  margin: "20px",
+  width: "245px"
 };
 
 export default function View({state, doOperation, changeOperation}) {
   return (
     <div style={STYLE}>
-      <Count value={state.count}/>
-      <OperationLabel operation={state.operation}/>
+      <div>
+          <Count value={state.count}/>
+          <OperationLabel operation={state.operation}/>
+      </div>
       <FormData doOperation={doOperation} changeOperation={changeOperation}/>
     </div>
   )
