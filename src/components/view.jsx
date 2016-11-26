@@ -1,25 +1,26 @@
 import React, {PropTypes} from 'react';
 import FormData from './form-data';
 import Count from './count';
+import OperationLabel from './operationLabel';
 
 const STYLE = {
   margin: "20px"
 };
 
-export default function View({state, addNumber, subtractNumber, multiplyNumber}) {
+export default function View({state, doOperation, changeOperation}) {
   return (
     <div style={STYLE}>
       <Count value={state.count}/>
-      <FormData addNumber={addNumber} subtractNumber={subtractNumber} multiplyNumber={multiplyNumber}/>
+      <OperationLabel operation={state.operation}/>
+      <FormData doOperation={doOperation} changeOperation={changeOperation}/>
     </div>
   )
 }
 
 View.propTypes = {
   state: PropTypes.object.isRequired,
-  addNumber: PropTypes.func.isRequired,
-  subtractNumber: PropTypes.func.isRequired,
-  multiplyNumber: PropTypes.func.isRequired
+  doOperation: PropTypes.func.isRequired,
+  changeOperation: PropTypes.func.isRequired
 };
 
 

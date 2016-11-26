@@ -1,10 +1,5 @@
 import React, {PropTypes} from 'react';
 
-const STYLE_SIGN = {
-  fontSize: '30px',
-  marginRight: '5px'
-};
-
 const STYLE_INPUT = {
   width: '200px',
   height: '40px',
@@ -36,8 +31,6 @@ export default class FormData extends React.Component {
     super(props);
     this.state = {text: ""};
     this.Input = null;
-    this.OpField = null;
-    this.currentOpFunc = null;
   }
 
   handleChange(event) {
@@ -47,39 +40,20 @@ export default class FormData extends React.Component {
   handleSubmit(event) {
     let number = parseInt(this.state.text);
     if (Number.isInteger(number)) {
-      this.currentOpFunc(number);
+      this.props.doOperation(number);
       this.setState({text: ""});
     }
     event.preventDefault();
   }
 
-  changeOperation(event, op) {
-    //Changes the sign of the current operation.
-    this.OpField.innerHTML = op;
-    
-    switch (op) {
-      case '+':
-        this.currentOpFunc = this.props.addNumber;
-      break;
-      case '-':
-        this.currentOpFunc = this.props.subtractNumber;
-      break;
-      case '*': 
-        this.currentOpFunc = this.props.multiplyNumber;
-      break;
-    }
-  }
-
   componentDidMount() {
     this.Input.focus();
-    this.changeOperation(null, '+');
   }
 
   render() {
     return (
       <form onSubmit={event => this.handleSubmit(event)}>
         <div>
-          <span style={STYLE_SIGN} ref={opField => this.OpField = opField}>+</span>
           <input type="text"
             onChange={event => this.handleChange(event)}
             value={this.state.text}
@@ -92,17 +66,17 @@ export default class FormData extends React.Component {
           <button 
             type="button" 
             style={STYLE_BUTTON}
-            onClick={event => this.changeOperation(event, '+')}
+            onClick={event => this.props.changeOperation('+')}
           >+</button>
           <button 
             type="button" 
             style={STYLE_BUTTON}
-            onClick={event => this.changeOperation(event, '-')}
+            onClick={event => this.props.changeOperation('-')}
           >-</button>
           <button 
             type="button"
             style={STYLE_BUTTON}
-            onClick={event => this.changeOperation(event, '*')}
+            onClick={event => this.props.changeOperation('*')}
           >*</button>
         </div>
       </form>
@@ -111,7 +85,6 @@ export default class FormData extends React.Component {
 }
 
 FormData.propTypes = {
-  addNumber: PropTypes.func.isRequired,
-  subtractNumber: PropTypes.func.isRequired,
-  multiplyNumber: PropTypes.func.isRequired
+  doOperation: PropTypes.func.isRequired,
+  changeOperation: PropTypes.func.isRequired
 };

@@ -1,20 +1,13 @@
-export function addNumberAction(number) {
+export function doOperationAction(number) {
   return {
-    type: "ADD_NUMBER",
+    type: "DO_OPERATION",
     number: number
   }
 }
 
-export function subtractNumberAction(number) {
+export function changeOperationAction(newOp) {
   return {
-    type: "SUBTRACT_NUMBER",
-    number: number
-  }
-}
-
-export function multiplyNumberAction(number) {
-    return {
-    type: "MULTIPLY_NUMBER", 
-    number: number
+    type: "CHANGE_OPERATION",
+    newOp: newOp
   }
 }

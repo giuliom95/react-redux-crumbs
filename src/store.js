@@ -2,32 +2,44 @@ import {createStore} from 'redux';
 import {Record} from 'immutable';
 
 const State = Record({
-  count: 0
+  count: 0,
+  operation: '+'
 }, 'State');
 
 
-function addNumber(state, number) {
-  return state.set('count', number + state.count);
+function doOperation(state, number) {
+  var result = 0;
+  
+  switch (state.operation) {
+    case '+':
+      result = state.count + number;
+      break;
+    case '-':
+      result = state.count - number;
+      break;
+    case '*':
+      result = state.count * number;
+      break;
+      
+    default:
+      result = state.count
+  }
+  
+  return state.set('count', result);
 }
 
-function subtractNumber(state, number) {
-  return state.set('count', state.count - number);
-}
-
-function multiplyNumber(state, number) {
-  return state.set('count', state.count * number); 
+function changeOperation(state, newOp) {
+  return state.set('operation', newOp);
 }
 
 function reducer(state, action) {
   state = state || new State();
 
   switch (action.type) {
-    case "ADD_NUMBER":
-      return addNumber(state, action.number);
-    case "SUBTRACT_NUMBER":
-      return subtractNumber(state, action.number);
-    case "MULTIPLY_NUMBER":
-      return multiplyNumber(state, action.number); 
+    case "DO_OPERATION":
+      return doOperation(state, action.number);
+    case "CHANGE_OPERATION":
+      return changeOperation(state, action.newOp);
     
     default:
       return state;
