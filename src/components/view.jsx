@@ -8,14 +8,17 @@ const STYLE = {
   width: "245px"
 };
 
-export default function View({state, doOperation, changeOperation}) {
+export default function View({state, doOperation, changeOperation, resetState}) {
   return (
     <div style={STYLE}>
       <div>
           <Count value={state.count}/>
           <OperationLabel operation={state.operation}/>
       </div>
-      <FormData doOperation={doOperation} changeOperation={changeOperation}/>
+      <FormData 
+        doOperation={doOperation} 
+        changeOperation={changeOperation} 
+        resetState={resetState}/>
     </div>
   )
 }
@@ -23,7 +26,8 @@ export default function View({state, doOperation, changeOperation}) {
 View.propTypes = {
   state: PropTypes.object.isRequired,
   doOperation: PropTypes.func.isRequired,
-  changeOperation: PropTypes.func.isRequired
+  changeOperation: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired
 };
 
 

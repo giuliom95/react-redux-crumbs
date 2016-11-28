@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import View from './view';
-import {doOperationAction, changeOperationAction} from '../actions';
+import {doOperationAction, changeOperationAction, resetStateAction} from '../actions';
 
 
 function mapStateToProps(reduxState) {
@@ -15,7 +15,8 @@ function mapStateToProps(reduxState) {
 function mapDispatchToProps(dispatch) {
   return {
     doOperation: bindActionCreators(doOperationAction, dispatch),
-    changeOperation: bindActionCreators(changeOperationAction, dispatch)
+    changeOperation: bindActionCreators(changeOperationAction, dispatch),
+    resetState: bindActionCreators(resetStateAction, dispatch)
   }
 }
 

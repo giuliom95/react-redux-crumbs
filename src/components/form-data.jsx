@@ -60,6 +60,12 @@ export default class FormData extends React.Component {
   componentDidMount() {
     this.Input.focus();
   }
+  
+  resetState(event){
+    this.props.resetState(); 
+    event.preventDefault(); 
+    this.Input.focus();
+  }
 
   render() {
     return (
@@ -89,6 +95,16 @@ export default class FormData extends React.Component {
             style={STYLE_BUTTON}
             onClick={event => this.changeOperation(event, '*')}
           >*</button>
+          <button 
+            type="button"
+            style={STYLE_BUTTON}
+            onClick={event => this.changeOperation(event, '/')}
+          >/</button>
+          <button 
+            type="button"
+            style={STYLE_BUTTON}
+            onClick={event => this.resetState(event)}
+          >C</button>
         </div>
       </form>
     )
@@ -97,5 +113,6 @@ export default class FormData extends React.Component {
 
 FormData.propTypes = {
   doOperation: PropTypes.func.isRequired,
-  changeOperation: PropTypes.func.isRequired
+  changeOperation: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired
 };

@@ -11,3 +11,9 @@ export function changeOperationAction(newOp) {
     newOp: newOp
   }
 }
+
+export function resetStateAction(){
+  return {
+    type: "RESET_STATE"
+  }
+}

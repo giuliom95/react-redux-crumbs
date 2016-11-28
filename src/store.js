@@ -20,6 +20,9 @@ function doOperation(state, number) {
     case '*':
       result = state.count * number;
       break;
+    case '/':
+      result = state.count / number;
+      break;
       
     default:
       result = state.count
@@ -32,6 +35,10 @@ function changeOperation(state, newOp) {
   return state.set('operation', newOp);
 }
 
+function resetState(){
+  return new State(); 
+ }
+
 function reducer(state, action) {
   state = state || new State();
 
@@ -40,7 +47,8 @@ function reducer(state, action) {
       return doOperation(state, action.number);
     case "CHANGE_OPERATION":
       return changeOperation(state, action.newOp);
-    
+    case "RESET_STATE":
+       return resetState(); 
     default:
       return state;
   }
